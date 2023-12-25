@@ -98,7 +98,5 @@ in {
           fi
         '';
       };
-
-      xsession.initExtra = xrdbMerge;
     };
 }

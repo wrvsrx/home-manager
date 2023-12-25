@@ -163,12 +163,6 @@ in {
     }
 
     (mkIf cfg.x11.enable {
-      xsession.initExtra = ''
-        ${pkgs.xorg.xsetroot}/bin/xsetroot -xcf ${cursorPath} ${
-          toString cfg.size
-        }
-      '';
-
       xresources.properties = {
         "Xcursor.theme" = cfg.name;
         "Xcursor.size" = cfg.size;
