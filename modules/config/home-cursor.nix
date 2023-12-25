@@ -143,7 +143,6 @@ in {
       home.sessionVariables = {
         XCURSOR_PATH = mkDefault ("$XCURSOR_PATH\${XCURSOR_PATH:+:}"
           + "${config.home.profileDirectory}/share/icons");
-        XCURSOR_SIZE = mkDefault cfg.size;
         XCURSOR_THEME = mkDefault cfg.name;
       };
 
