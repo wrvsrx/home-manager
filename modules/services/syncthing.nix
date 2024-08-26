@@ -143,7 +143,10 @@ let
         } ${curlAddressArgs "/rest/config/${subOption}"}
       ''))
       (lib.concatStringsSep "\n")
-    ]) + ''
+    ]) + lib.optionalString (cfg.passwordFile != null) ''
+      syncthing_password=$(${cat} ${cfg.passwordFile})
+      curl -X PATCH -d '{"password": "'$syncthing_password'"}' ${curlAddressArgs "/rest/config/gui"}
+    '' + ''
       # restart Syncthing if required
       if curl ${curlAddressArgs "/rest/config/restart-required"} |
          ${jq} -e .requiresRestart > /dev/null; then
@@ -184,6 +187,14 @@ in {
         description = ''
           Path to the `key.pem` file, which will be copied into Syncthing's
           config directory.
+        '';
+      };
+
+      passwordFile = mkOption {
+        type = nullOr path;
+        default = null;
+        description = ''
+          Path to the gui password file.
         '';
       };
 
