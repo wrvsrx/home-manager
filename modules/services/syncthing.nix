@@ -358,18 +358,15 @@ in {
                   };
 
                   path = mkOption {
-                    type = str // {
-                      check = x:
-                        str.check x && !strings.hasPrefix "/" x
-                        && !strings.hasPrefix "~" x;
-                      description = str.description
-                        + " not starting with / or ~/";
+                    type = types.str // {
+                      check = x: types.str.check x && (substring 0 1 x == "/" || substring 0 2 x == "~/");
+                      description = types.str.description + " starting with / or ~/";
                     };
-                    apply = x: "${config.home.homeDirectory}/${x}";
                     default = name;
                     description = ''
-                      The path to the folder which should be shared relative to the
-                      user's home directory.
+                      The path to the folder which should be shared.
+                      Only absolute paths (starting with `/`) and paths relative to
+                      the user's home directory (starting with `~/`) are allowed.
                     '';
                   };
 
