@@ -119,7 +119,7 @@
       contactLocalStorageDirs = lib.mapAttrsToList localStorageDir contactAccounts;
       localStorageDirs = calendarLocalStorageDirs ++ contactLocalStorageDirs;
 
-      mkTmpFileRule = (dir: "d ${dir} 0750 ${config.home.username} users - -");
+      mkTmpFileRule = (dir: "d ${dir} 0750 ${config.home.username} - - -");
       tmpFileRules = map mkTmpFileRule localStorageDirs;
     in
     lib.mkIf cfg.enable {
