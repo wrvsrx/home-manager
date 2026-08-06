@@ -33,7 +33,12 @@ let
   localStorage =
     a:
     filterAttrs (_: v: v != null) (
-      (getAttrs [ "type" "fileExt" "encoding" ] a.local)
+      (getAttrs [
+        "type"
+        "fileExt"
+        "encoding"
+        "readOnly"
+      ] a.local)
       // {
         inherit (a.local) path;
         postHook =
@@ -89,6 +94,8 @@ let
       ''fileext = "${v}"''
     else if (n == "encoding") then
       ''encoding = "${v}"''
+    else if (n == "readOnly") then
+      "read_only = ${lib.boolToString v}"
     else if (n == "postHook") then
       ''post_hook = "${v}"''
     else if (n == "url") then
