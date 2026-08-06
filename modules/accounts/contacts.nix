@@ -39,6 +39,12 @@ let
             Defaults to UTF-8.
           '';
         };
+
+        readOnly = mkOption {
+          type = types.nullOr types.bool;
+          default = null;
+          description = "Whether vdirsyncer should avoid writing to this storage.";
+        };
       };
     };
 
