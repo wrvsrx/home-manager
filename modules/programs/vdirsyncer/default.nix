@@ -282,9 +282,13 @@ in
               "fileExt"
               "encoding"
               "postHook"
+              "readOnly"
             ]
           else if (t == "singlefile") then
-            [ "encoding" ]
+            [
+              "encoding"
+              "readOnly"
+            ]
           else if (t == "google_calendar") then
             [
               "timeRange"
